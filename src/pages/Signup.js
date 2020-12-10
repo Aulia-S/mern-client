@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import SignupForm from '../components/SignupForm';
-import './Signup.css';
+import '../components/App.css';
 import isEmpty from 'validator/lib/isEmpty';
 import isEmail from 'validator/lib/isEmail';
 import equals from 'validator/lib/equals';
@@ -34,7 +34,6 @@ const Signup = () => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-      successMsg: false,
       errorMsg: false
     })
   }

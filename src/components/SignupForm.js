@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './SignupForm.css';
+import './App.css';
 
 const SignupForm = props => {
 
@@ -39,7 +39,7 @@ const SignupForm = props => {
       </div>
 
       <button type='submit' className='btn btn-primary btn-block'>Sign up</button>
-      <small className='text-center d-block p-2 text-white'>Have an account? <Link to='/signin' style={{backgroundColor: '#ffffff44'}}>Sign in</Link></small>
+      <small className='text-center d-block p-2'>Have an account? <Link to='/signin' style={{backgroundColor: '#ffffff44'}}>Sign in</Link></small>
 
     </form>
   );

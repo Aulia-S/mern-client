@@ -1,4 +1,8 @@
-#signup{
+.signupform, .signform{
+  opacity: 0.9;
+}
+
+#signup, #signin{
   background-image: url('../images/signup-bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
