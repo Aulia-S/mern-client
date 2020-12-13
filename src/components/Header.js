@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { isAuthenticated } from '../helpers/auth';
 
 const Header = () => {
 
@@ -13,9 +14,28 @@ const Header = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav ml-auto">
-            <Link className="nav-link" to="/">Home</Link>
-            <Link className="nav-link" to="/signin">Sign in</Link>
-            <Link className="nav-link" to="/signup">Sign up</Link>
+            {!isAuthenticated() && (
+              <Fragment>
+                <Link className="nav-link" to="/">Home</Link>
+                <Link className="nav-link" to="/signin">Sign in</Link>
+                <Link className="nav-link" to="/signup">Sign up</Link>
+              </Fragment>
+            )}
+            {isAuthenticated() && isAuthenticated().role === 0 && (
+              <Fragment>
+                <Link className="nav-link" to="/user/dashboard">Dashboard</Link>
+              </Fragment>
+            )}
+            {isAuthenticated() && isAuthenticated().role === 1 && (
+              <Fragment>
+                <Link className="nav-link" to="/admin/dashboard">Dashboard</Link>
+              </Fragment>
+            )}
+            {isAuthenticated() && (
+              <Fragment>
+                <Link className="nav-link" to="/admin/dashboard">Logout</Link>
+              </Fragment>
+            )}
           </div>
         </div>
       </nav>
@@ -31,4 +51,4 @@ const Header = () => {
 
 }
 
-export default Header;
+export default withRouter(Header);

@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
+import { isAuthenticated } from '../helpers/auth';
 import SignupForm from '../components/SignupForm';
 import '../components/App.css';
 import isEmpty from 'validator/lib/isEmpty';
@@ -9,15 +11,26 @@ import { showLoading } from '../helpers/loading';
 import { signup } from '../api/auth';
 
 const Signup = () => {
+  let history = useHistory();
+
+  useEffect(() => {
+    if(isAuthenticated() && isAuthenticated().role === 1 ) {
+      history.push('/admin/dashboard');
+    }else if(isAuthenticated() && isAuthenticated().role === 0 ) {
+      history.push('/user/dashboard');
+    }
+  }, [history])
+
+
   /*******************
    * STATE
    * *****************/
   
   const [formData, setFormData] = useState({
-    username: 'abc',
-    email: 'abc@gmail.com',
-    password: '123456',
-    password2: '123456',
+    username: '',
+    email: '',
+    password: '',
+    password2: '',
     successMsg: false,
     errorMsg: false,
     loading: false

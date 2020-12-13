@@ -1,25 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SigninForm from '../components/SigninForm';
 import { showErrMsg } from '../helpers/message';
 import { showLoading } from '../helpers/loading';
 import isEmpty from 'validator/lib/isEmpty';
 import isEmail from 'validator/lib/isEmail';
 import { signin } from '../api/auth';
+import { setAuthentication, isAuthenticated } from '../helpers/auth';
+import { useHistory } from 'react-router-dom';
+
 
 const Signin = () => {
+  let history = useHistory();
+
+  useEffect(() => {
+    if(isAuthenticated() && isAuthenticated().role === 1 ) {
+      history.push('/admin/dashboard');
+    }else if(isAuthenticated() && isAuthenticated().role === 0 ) {
+      history.push('/user/dashboard');
+    }
+  }, [history])
+
+
   /*******************
    * STATE
    * *****************/
   
   const [formData, setFormData] = useState({
-    email: 'abc@gmail.com',
-    password: '123456',
+    email: '',
+    password: '',
     errorMsg: false,
-    loading: false,
-    redirectToDashboard: false
+    loading: false
   });
   
-  const { email, password, errorMsg, loading, redirectToDashboard } = formData;
+  const { email, password, errorMsg, loading } = formData;
 
   /*******************
    * EVENT HANDLER
@@ -53,6 +66,21 @@ const Signin = () => {
       setFormData({ ...formData, loading: true });
 
       signin(data)
+        .then(res => {
+          setAuthentication(res.data.token, res.data.user)
+
+          if(isAuthenticated() && isAuthenticated().role === 1 ) {
+            console.log('Redirecting to admin dashboard');
+            history.push('/admin/dashboard');
+          }else {
+            console.log('Redirecting to user dashboard')
+            history.push('/user/dashboard');
+          }
+        })
+        .catch(err => {
+          console.log('signin api function error: ', err)
+        })
+
 
     }    
   }

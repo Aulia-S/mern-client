@@ -5,6 +5,8 @@ import Home from '../pages/Home';
 import Signup from '../pages/Signup';
 import Signin from '../pages/Signin';
 import NotFound from '../pages/Notfound';
+import AdminDashboard from '../pages/AdminDashboard';
+import UserDashboard from '../pages/UserDashboard';
 
 const App = () => {
   return (
@@ -15,11 +17,17 @@ const App = () => {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route path='/signin'>
+          <Route exact path='/signin'>
             <Signin />
           </Route>
-          <Route path='/signup'>
+          <Route exact path='/signup'>
             <Signup />
+          </Route>
+          <Route exact path='/admin/dashboard'>
+            <AdminDashboard />
+          </Route>
+          <Route exact path='/user/dashboard'>
+            <UserDashboard />
           </Route>
           <Route>
             <NotFound />
