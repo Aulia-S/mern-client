@@ -7,6 +7,8 @@ import Signin from '../pages/Signin';
 import NotFound from '../pages/Notfound';
 import AdminDashboard from '../pages/AdminDashboard';
 import UserDashboard from '../pages/UserDashboard';
+import Admin from '../routes/Admin';
+import User from '../routes/User';
 
 const App = () => {
   return (
@@ -14,24 +16,12 @@ const App = () => {
         <Header />
 
         <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route exact path='/signin'>
-            <Signin />
-          </Route>
-          <Route exact path='/signup'>
-            <Signup />
-          </Route>
-          <Route exact path='/admin/dashboard'>
-            <AdminDashboard />
-          </Route>
-          <Route exact path='/user/dashboard'>
-            <UserDashboard />
-          </Route>
-          <Route>
-            <NotFound />
-          </Route>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/signin' component={Signin} />
+          <Route exact path='/signup' component={Signup} />
+          <Admin exact path='/admin/dashboard' component={AdminDashboard} />
+          <User exact path='/user/dashboard' component={UserDashboard} />
+          <Route component={NotFound} />
         </Switch>
     </Router>
   )

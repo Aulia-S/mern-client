@@ -1,8 +1,14 @@
 import React, { Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { isAuthenticated } from '../helpers/auth';
+import { isAuthenticated, logout } from '../helpers/auth';
 
-const Header = () => {
+const Header = ({ history }) => {
+  // event handler
+  const handleLogout = e => {
+    logout(() => {
+      history.push('/signin');
+    });
+  }
 
   //view
   const showNavigation = () => {
@@ -33,7 +39,7 @@ const Header = () => {
             )}
             {isAuthenticated() && (
               <Fragment>
-                <Link className="nav-link" to="/admin/dashboard">Logout</Link>
+                <button className="btn btn-outline-primary" to="/admin/dashboard" onClick={handleLogout}>Logout</button>
               </Fragment>
             )}
           </div>
