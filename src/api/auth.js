@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const URL = 'http://localhost:5000'
+import { URL } from './URL' 
 
 export const signup = async data => {
   const config = {
