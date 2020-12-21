@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { URL } from './URL' 
 
 export const signup = async data => {
   const config = {
@@ -8,7 +7,7 @@ export const signup = async data => {
     },
   };
 
-  const response = await axios.post(`${URL}/api/auth/signup`, data, config);
+  const response = await axios.post(`/api/auth/signup`, data, config);
 
   return response;
 }
@@ -20,7 +19,7 @@ export const signin = async data => {
     },
   };
 
-  const response = await axios.post(`${URL}/api/auth/signin`, data, config);
+  const response = await axios.post(`/api/auth/signin`, data, config);
 
   return response;
 }
