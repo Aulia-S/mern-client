@@ -22,24 +22,24 @@ const Header = ({ history }) => {
           <div className="navbar-nav ml-auto">
             {!isAuthenticated() && (
               <Fragment>
-                <Link className="nav-link" to="/"><i class="fas fa-home"></i> Home</Link>
-                <Link className="nav-link" to="/signup"><i class="fas fa-edit"></i> Sign up</Link>
-                <Link className="nav-link btn btn-outline-primary" to="/signin"><i class="fas fa-sign-in-alt"></i> Sign in</Link>
+                <Link className="nav-link" to="/"><i className="fas fa-home"></i> Home</Link>
+                <Link className="nav-link" to="/signup"><i className="fas fa-edit"></i> Sign up</Link>
+                <Link className="nav-link btn btn-outline-primary" to="/signin"><i className="fas fa-sign-in-alt"></i> Sign in</Link>
               </Fragment>
             )}
             {isAuthenticated() && isAuthenticated().role === 0 && (
               <Fragment>
-                <Link className="nav-link" to="/user/dashboard"><i class="fas fa-home"></i> Dashboard</Link>
+                <Link className="nav-link" to="/user/dashboard"><i className="fas fa-home"></i> Dashboard</Link>
               </Fragment>
             )}
             {isAuthenticated() && isAuthenticated().role === 1 && (
               <Fragment>
-                <Link className="nav-link" to="/admin/dashboard"><i class="fas fa-home"></i> Dashboard</Link>
+                <Link className="nav-link" to="/admin/dashboard"><i className="fas fa-home"></i> Dashboard</Link>
               </Fragment>
             )}
             {isAuthenticated() && (
               <Fragment>
-                <button className="btn btn-outline-primary" to="/admin/dashboard" onClick={handleLogout}><i class="fas fa-sign-in-alt"></i> Logout</button>
+                <button className="btn btn-outline-primary" to="/admin/dashboard" onClick={handleLogout}><i className="fas fa-sign-in-alt"></i> Logout</button>
               </Fragment>
             )}
           </div>
