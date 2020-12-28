@@ -1,5 +1,6 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import { createCategory, getCategories } from '../api/category';
+import { createProduct } from '../api/product';
 import isEmpty from 'validator/lib/isEmpty';
 import { showErrMsg, showSuccessMsg } from '../helpers/message';
 import { showLoading } from '../helpers/loading';
@@ -13,7 +14,7 @@ const AdminDashboard = () => {
   const [successMsg, setSuccessMsg] = useState('');
   const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState({
-    productImage: '',
+    productImage: null,
     productName: '',
     productDesc: '',
     productPrice: '',
@@ -85,6 +86,39 @@ const AdminDashboard = () => {
       ...productData,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleProductSubmit = e => {
+    e.preventDefault()
+
+    //validation product data
+    if (productImage === null) {
+      setErrorMsg('Please select an image');
+    }else if(isEmpty(productName) || isEmpty(productDesc) || isEmpty(productPrice)){
+      setErrorMsg('All fields are required');
+    }else if(isEmpty(productCategory)){
+      setErrorMsg('Please select a category');
+    }else if(isEmpty(productQty)){
+      setErrorMsg('Please input a quantity')
+    }else {
+      // success
+      let formData = new FormData();
+
+      formData.append('productImage', productImage);
+      formData.append('productName', productName);
+      formData.append('productDesc', productDesc);
+      formData.append('productPrice', productPrice);
+      formData.append('productCategory', productCategory);
+      formData.append('productQty', productQty);
+
+      createProduct(formData)
+        .then(res => {
+          console.log('Server response', res);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
   }
 
   //VIEWS
@@ -163,7 +197,7 @@ const AdminDashboard = () => {
     <div id="addFoodModal" className='modal' onClick={handleMessages}>
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content">
-          <form onSubmit={handleCategorySubmit}>
+          <form onSubmit={handleProductSubmit}>
             <div className="modal-header bg-info text-white">
               <h5 className='modal-title'>Add Food</h5>
               <button className='close' data-dismiss='modal'>
@@ -195,7 +229,7 @@ const AdminDashboard = () => {
 
                       <div className="form-group">
                         <label className='text-secondary'>Price</label>
-                        <input type="text" className='form-control' name='productPrice' value={productPrice} onChange={handleProductChange} />
+                        <input type="number" className='form-control' name='productPrice' value={productPrice} onChange={handleProductChange} />
                       </div>
 
                       <div className='form-row'>
