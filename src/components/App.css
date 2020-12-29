@@ -1,9 +1,11 @@
-.signupform, .signform{
+.signupform,
+.signform {
   opacity: 0.9;
 }
 
-#signup, #signin{
-  background-image: url('../images/signup-bg.jpg');
+#signup,
+#signin {
+  background-image: url("../images/signup-bg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
