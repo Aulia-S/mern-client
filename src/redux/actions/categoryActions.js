@@ -1,5 +1,5 @@
 import { START_LOADING, STOP_LOADING } from '../constants/loadingConstants';
-import { SHOW_ERROR_MESSAGE } from '../constants/messageConstants';
+import { SHOW_SUCCESS_MESSAGE ,SHOW_ERROR_MESSAGE } from '../constants/messageConstants';
 import { GET_CATEGORIES, CREATE_CATEGORY } from '../constants/categoryConstants';
 import axios from 'axios';
 

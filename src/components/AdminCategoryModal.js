@@ -12,7 +12,7 @@ const AdminCategoryModal = () => {
    * REDUX STATE
    * ***************/   
   const { successMsg, errorMsg } = useSelector(state => state.messages);
-  const { loading } = useSelector(state => state.loading);
+  const { loading } = useSelector(state =>  state.loading);
 
   const dispatch = useDispatch();
   /*****************
@@ -40,8 +40,8 @@ const AdminCategoryModal = () => {
       setClientSideErrorMsg('Please enter a category')
     }else{
       const data = { category }
-
-      dispatch(createCategory(data));        
+      dispatch(createCategory(data));
+      setCategory('');        
     }
   }
 
@@ -60,7 +60,8 @@ const AdminCategoryModal = () => {
               </button>
             </div>
             <div className="modal-body my-2">
-                {clientSideErrorMsg && showErrMsg(errorMsg)}
+                {errorMsg && showErrMsg(errorMsg)}
+                {clientSideErrorMsg && showErrMsg(clientSideErrorMsg)}
                 {successMsg && showSuccessMsg(successMsg)}
                 {
                   loading ? (
